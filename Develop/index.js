@@ -28,9 +28,15 @@ const questions = [{
     name: 'Credits',
 },
 {
-    type: 'input',
+    type: 'list',
     message: 'License',
     name: 'License',
+    choices: [
+        'Apache License 2.0',
+        'MIT License',
+        'GPL License',
+        'None'
+    ]
 }];
 
 
