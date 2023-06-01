@@ -1,6 +1,8 @@
 // TODO: Include packages needed for this application
 const inquirer = require('inquirer');
 const fs = require('fs');
+const generateMarkdown = require('./utils/generateMarkdown');
+
 // TODO: Create an array of questions for user input
 const questions = [{
     type: 'input',
@@ -34,7 +36,7 @@ const questions = [{
     choices: [
         'Apache License 2.0',
         'MIT License',
-        'GPL License',
+        'GNU GPL v3',
         'None'
     ]
 }];
@@ -42,7 +44,6 @@ const questions = [{
 
 // TODO: Create a function to write README file
 function writeToFile(fileName, data) {
-
     // create a readme file
     fs.appendFile(`${fileName}`,
         // add to the reade me the title and the user input
@@ -51,9 +52,23 @@ function writeToFile(fileName, data) {
         `# Table of Contents\n${data.TableOfContents}\n\n` +
         `# Usage\n${data.Usage}\n\n` +
         `# Credits\n${data.Credits}\n\n` +
-        `# License\n${data.License}\n\n`,
+        `# License\n${data.License}\n`,
         (err) =>
-            err ? console.error(err) : console.log('Commit logged!')
+            err ? console.error(err) : ''
+    );
+
+    const licBadge = generateMarkdown.renderLicenseBadge(data.License);
+    fs.appendFile(`${fileName}`,
+        `${licBadge}\n`, { flag: 'a+' },
+        (err) =>
+            err ? console.error(err) : ''
+    );
+
+    const licLink = generateMarkdown.renderLicenseLink(data.License);
+    fs.appendFile(`${fileName}`,
+        `${licLink}\n`, { flag: 'a+' },
+        (err) =>
+            err ? console.error(err) : ''
     );
 }
 
