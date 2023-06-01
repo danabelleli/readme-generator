@@ -5,7 +5,7 @@ const fs = require('fs');
 const questions = [{
     type: 'input',
     message: "Your Project's Title?",
-    name: 'title',
+    name: 'Title',
 },
 {
     type: 'input',
@@ -15,7 +15,7 @@ const questions = [{
 {
     type: 'input',
     message: 'Table of Contents',
-    name: 'Table of Contents',
+    name: 'TableOfContents',
 },
 {
     type: 'input',
@@ -36,9 +36,18 @@ const questions = [{
 
 // TODO: Create a function to write README file
 function writeToFile(fileName, data) {
-    fs.appendFile(`${fileName}`, `${data}\n`, (err) =>
-        // TODO: Describe how this ternary operator works
-        err ? console.error(err) : console.log('Commit logged!')
+
+    // create a readme file
+    fs.appendFile(`${fileName}`,
+        // add to the reade me the title and the user input
+        `Title\n${data.Title}\n\n` +
+        `Description\n${data.Description}\n\n` +
+        `Table of Contents\n${data.TableOfContents}\n\n` +
+        `Usage\n${data.Usage}\n\n` +
+        `Credits\n${data.Credits}\n\n` +
+        `License\n${data.License}\n\n`,
+        (err) =>
+            err ? console.error(err) : console.log('Commit logged!')
     );
 }
 
@@ -46,9 +55,11 @@ function writeToFile(fileName, data) {
 function init() {
     inquirer
         .prompt(questions)
-        .then(() => writeToFile('readme.md', process.argv[2])
+        .then((answer) => writeToFile('readme.md', answer)
         );
 }
 
 // Function call to initialize app
 init();
+
+
