@@ -40,12 +40,12 @@ function writeToFile(fileName, data) {
     // create a readme file
     fs.appendFile(`${fileName}`,
         // add to the reade me the title and the user input
-        `Title\n${data.Title}\n\n` +
-        `Description\n${data.Description}\n\n` +
-        `Table of Contents\n${data.TableOfContents}\n\n` +
-        `Usage\n${data.Usage}\n\n` +
-        `Credits\n${data.Credits}\n\n` +
-        `License\n${data.License}\n\n`,
+        `## Title\n${data.Title}\n\n` +
+        `# Description\n${data.Description}\n\n` +
+        `# Table of Contents\n${data.TableOfContents}\n\n` +
+        `# Usage\n${data.Usage}\n\n` +
+        `# Credits\n${data.Credits}\n\n` +
+        `# License\n${data.License}\n\n`,
         (err) =>
             err ? console.error(err) : console.log('Commit logged!')
     );
