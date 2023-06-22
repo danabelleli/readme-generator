@@ -76,7 +76,7 @@ function writeToFile(fileName, data) {
 function init() {
     inquirer
         .prompt(questions)
-        .then((answer) => writeToFile('readme.md', answer)
+        .then((answer) => writeToFile('readmeSample.md', answer)
         );
 }
 
